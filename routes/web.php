@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\DashboardController;
+use App\Http\Controllers\ProductCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['auth:sanctum', 'verified']],function(){
+    Route::name('dashboard.')->prefix('dashboard')->group(function(){
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-Route::get('/', function () {
-    return view('welcome');
+        Route::middleware(['admin'])->group(function(){
+            Route::resource('category',ProductCategoryController::class);
+        });
+    });
 });
-
-Route::middleware(['auth:sanctum', 'verified', 'admin'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
