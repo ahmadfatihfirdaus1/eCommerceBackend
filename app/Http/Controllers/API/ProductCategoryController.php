@@ -1,56 +1,49 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Helpers\ResponseFormatter;
-use App\Models\ProductsCategory;
 use Illuminate\Http\Request;
+use App\Models\ProductsCategory;
+use App\Helpers\ResponseFormatter;
+use App\Http\Controllers\Controller;
 
 class ProductCategoryController extends Controller
 {
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit');
-        $name = $request->input('id');
+        $limit = $request->input('limit', 6);
+        $name = $request->input('name');
         $show_product = $request->input('show_product');
 
-        if ($id) {
-            //ProductsCategory dr model ProductsCategory
+        if($id)
+        {
             $category = ProductsCategory::with(['products'])->find($id);
-            //(['products']) = diambil dr model ProductsCategory karena tidak ada relasi lain selain products
 
-            //jika datanya ada
-            if ($category) {
+            if($category)
                 return ResponseFormatter::success(
                     $category,
-                    'Data Product Category diambil'
+                    'Data produk berhasil diambil'
                 );
-                //jika tidak ada datanya
-            } else {
+            else
                 return ResponseFormatter::error(
                     null,
-                    'Data Category Tidak Ada',
+                    'Data kategori produk tidak ada',
                     404
                 );
-            }
         }
 
         $category = ProductsCategory::query();
-        //di ProductsCategory tidak ada relasi apa2 maka pake query();
 
-        //filtering
-        if ($name) {
+        if($name)
             $category->where('name', 'like', '%' . $name . '%');
-        }
 
-        if ($show_product) {
+        if($show_product)
             $category->with('products');
-        }
+
         return ResponseFormatter::success(
-            //karena ini ngambil datanya lebih dr satu maka pake fungsi paginet saja
             $category->paginate($limit),
-            'Data List category Berhasil diambil'
+            'Data list kategori produk berhasil diambil'
         );
     }
 }
