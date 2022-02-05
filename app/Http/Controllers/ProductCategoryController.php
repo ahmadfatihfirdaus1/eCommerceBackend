@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Http\Requests\ProductCategoryRequest;
-use App\Models\ProductsCategory;
+use App\Models\ProductCategory;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductCategoryController extends Controller
@@ -17,7 +17,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = ProductsCategory::query();
+            $query = ProductCategory::query();
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -63,7 +63,7 @@ class ProductCategoryController extends Controller
     {
         $data = $request->all();
 
-        ProductsCategory::create($data);
+        ProductCategory::create($data);
 
         return redirect()->route('dashboard.category.index');
     }
@@ -74,7 +74,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show(ProductsCategory $category)
+    public function show(ProductCategory $category)
     {
         //
     }
@@ -85,7 +85,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function edit(ProductsCategory $category)
+    public function edit(ProductCategory $category)
     {
         return view('pages.dashboard.category.edit',[
             'item' => $category
@@ -99,7 +99,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $category
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProductCategoryRequest $request, ProductsCategory $category)
+    public function update(ProductCategoryRequest $request, ProductCategory $category)
     {
         $data = $request->all();
 
@@ -114,7 +114,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $category
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(ProductsCategory $category)
+    public function destroy(ProductCategory $category)
     {
         $category->delete();
 

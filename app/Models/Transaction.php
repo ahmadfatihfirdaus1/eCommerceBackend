@@ -10,30 +10,17 @@ class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
-
-         /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'users_id',
-        'address',
-        'total_price',
-        'shipping_price',
-        'status',
-        'payment ',
+        'users_id', 'address', 'payment', 'total_price', 'shipping_price', 'status'
     ];
-
-//user table
-    public function user(){
+    
+    public function user()
+    {
         return $this->belongsTo(User::class, 'users_id', 'id');
     }
 
-
-    //transactionitems table
-    public function items(){
-        return $this->hasMany(TransactionsItem::class, 'transactions_id', 'id');
+    public function items()
+    {
+        return $this->hasMany(TransactionItem::class, 'transactions_id', 'id');
     }
-
 }

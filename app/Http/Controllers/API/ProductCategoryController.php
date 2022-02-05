@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Models\ProductsCategory;
+use App\Models\ProductCategory;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class ProductCategoryController extends Controller
 
         if($id)
         {
-            $category = ProductsCategory::with(['products'])->find($id);
+            $category = ProductCategory::with(['products'])->find($id);
 
             if($category)
                 return ResponseFormatter::success(
@@ -33,7 +33,7 @@ class ProductCategoryController extends Controller
                 );
         }
 
-        $category = ProductsCategory::query();
+        $category = ProductCategory::query();
 
         if($name)
             $category->where('name', 'like', '%' . $name . '%');
