@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCategoryRequest;
 use App\Models\ProductsCategory;
@@ -18,6 +18,7 @@ class ProductCategoryController extends Controller
     {
         if (request()->ajax()) {
             $query = ProductsCategory::query();
+            
             return DataTable::of($query)
                 ->addColumn('action', function ($item) {
                     return '<a class="inline-block px-2 py-1 m-1 text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline" href="' . route('dashboard.category.edit', $item->id) . '">Edit</a>';
