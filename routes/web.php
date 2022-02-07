@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => ['auth:sanctum', 'verified']],function(){
-    Route::name('dashboard.')->prefix('dashboard')->group(function(){
+
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-        Route::middleware(['admin'])->group(function(){
-            Route::resource('category',ProductCategoryController::class);
+        Route::middleware(['admin'])->group(function () {
+            Route::resource('category', ProductCategoryController::class);
         });
     });
 });
