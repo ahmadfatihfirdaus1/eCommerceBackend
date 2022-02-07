@@ -43,6 +43,10 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "if test -f 'storage/oauth-public.key'; then @php artisan package:discover --ansi; fi"
         ],
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "chmod -R 777 public/"
+        ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
