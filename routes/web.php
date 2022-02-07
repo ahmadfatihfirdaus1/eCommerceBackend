@@ -22,17 +22,10 @@ use App\Http\Controllers\ProductCategoryController;
 */
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-<<<<<<< HEAD
-=======
-   
->>>>>>> c6b89796dc1f28a9a631d90a578b9cff16e4c7b5
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::middleware(['admin'])->group(function () {
-<<<<<<< HEAD
-            Route::resource('category', ProductCategoryController::class);
-=======
             Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);
             Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
@@ -44,7 +37,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
             Route::resource('user', UserController::class)->only([
                 'index', 'edit', 'update', 'destroy'
             ]);
->>>>>>> c6b89796dc1f28a9a631d90a578b9cff16e4c7b5
         });
     });
 });
