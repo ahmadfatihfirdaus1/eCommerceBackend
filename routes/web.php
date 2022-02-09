@@ -21,11 +21,6 @@ use App\Http\Controllers\ProductCategoryController;
 |
 */
 
-Route::get('/create-symbolic', function () {
-    symlink(storage_path('/app/public'), public_path('storage'));
-    echo "symlink Created, Thabks";
-});
-
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
