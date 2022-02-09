@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages.dashboard.user.edit',[
+        return view('pages.dashboard.user.edit', [
             'item' => $user
         ]);
     }
@@ -95,7 +95,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $data = $request->all();
-        
+
         $user->update($data);
 
         return redirect()->route('dashboard.user.index');

@@ -17,6 +17,7 @@
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
                     { data: 'roles', name: 'roles' },
+                    { data: 'alamat', name: 'alamat' },
                     {
                         data: 'action',
                         name: 'action',
@@ -40,6 +41,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Roles</th>
+                            <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                         </thead>
